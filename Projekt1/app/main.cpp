@@ -3,15 +3,22 @@
 #include "doctest/doctest.h"
 #endif
 
+#include <PriorityQueue.hh>
+#include <LinkedList.hh>
 #include <iostream>
 #include <stdlib.h>
+
+typedef LinkedList<int> IntLinkedList;
+
 int main()
 {
-	std::cout << "C++ Boiler Plate v" << PROJECT_VERSION_MAJOR << "." << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH << "."
-						<< PROJECT_VERSION_TWEAK << std::endl;
-	std::system("cat ../LICENSE");
-	if (0 == 0)
-	{
-		return 0;
-	}
+	IntLinkedList list;
+	list.addFront(5);
+	if(!list.empty())
+		std::cout << list.front() << std::endl;
+	else std::cout << "Pusta lista :)\n";
+	list.removeFront();
+	if(!list.empty())
+		std::cout << list.front() << std::endl;
+	else std::cout << "Pusta lista :)\n";
 }
