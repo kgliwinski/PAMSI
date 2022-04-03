@@ -1,6 +1,10 @@
 #ifndef LIST_NODE_HH
 #define LIST_NODE_HH
 
+
+/*! \class ListNode
+ *  \brief A ListNode class contains definition of Node for singly LinkedList 
+*/
 template<typename type>
 class ListNode
 {
