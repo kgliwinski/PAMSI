@@ -2,6 +2,7 @@
 #define PRIORITY_QUEUE_HH
 
 #include <iostream>
+#include <string>
 
 #include "LinkedList.hh"
 #include "PriorityQueueNode.hh"
@@ -42,4 +43,7 @@ class PriorityQueue
 template<typename type>
 std::ostream &operator<<(std::ostream &out, const PriorityQueue<type> &queue);
 #include "../source/PriorityQueue.cpp"
+
+typedef PriorityQueue<std::string> stringPriorityQueue;
+
 #endif

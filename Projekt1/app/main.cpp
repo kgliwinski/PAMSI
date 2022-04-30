@@ -3,25 +3,21 @@
 #include "doctest/doctest.h"
 #endif
 
-#include <PriorityQueue.hh>
-#include <LinkedList.hh>
 #include <iostream>
 #include <stdlib.h>
+
+#include "../include/PriorityQueue.hh"
+#include "../include/LinkedList.hh"
+#include "../include/Message.hh"
 
 typedef LinkedList<int> intLinkedList;
 typedef PriorityQueue<int> intPriorityQueue;
 
 int main()
 {
-	intPriorityQueue queue;
-	queue.insert(12, 1);
-	queue.insert(3, 3);
-	queue.insert(13,2);
-	std::cout << queue;
-	queue.removeMin();
-	std::cout << queue;
-	queue.removeMin();
-	std::cout << queue.min() << std::endl;
-	queue.removeMin();
-	std::cout << queue;
+	std::string fileName = "../messages/message1.txt";
+	Message mess;
+	mess.readFromFile(fileName);
+	std::cout << mess;
+
 }

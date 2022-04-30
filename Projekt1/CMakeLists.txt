@@ -39,6 +39,8 @@ find_lto(CXX)
 set(SOURCES          # All .cpp files in source/
     source/LinkedList.cpp
     source/PriorityQueue.cpp
+    source/MessagePart.cpp
+    source/Message.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
