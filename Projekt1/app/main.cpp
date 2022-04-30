@@ -8,17 +8,20 @@
 #include <iostream>
 #include <stdlib.h>
 
-typedef LinkedList<int> IntLinkedList;
+typedef LinkedList<int> intLinkedList;
+typedef PriorityQueue<int> intPriorityQueue;
 
 int main()
 {
-	IntLinkedList list;
-	list.addFront(5);
-	if(!list.isEmpty())
-		std::cout << list.front() << std::endl;
-	else std::cout << "Pusta lista :)\n";
-	list.removeFront();
-	if(!list.isEmpty())
-		std::cout << list.front() << std::endl;
-	else std::cout << "Pusta lista :)\n";
+	intPriorityQueue queue;
+	queue.insert(12, 1);
+	queue.insert(3, 3);
+	queue.insert(13,2);
+	std::cout << queue;
+	queue.removeMin();
+	std::cout << queue;
+	queue.removeMin();
+	std::cout << queue.min() << std::endl;
+	queue.removeMin();
+	std::cout << queue;
 }
