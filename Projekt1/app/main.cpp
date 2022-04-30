@@ -14,11 +14,11 @@ int main()
 {
 	IntLinkedList list;
 	list.addFront(5);
-	if(!list.empty())
+	if(!list.isEmpty())
 		std::cout << list.front() << std::endl;
 	else std::cout << "Pusta lista :)\n";
 	list.removeFront();
-	if(!list.empty())
+	if(!list.isEmpty())
 		std::cout << list.front() << std::endl;
 	else std::cout << "Pusta lista :)\n";
 }
