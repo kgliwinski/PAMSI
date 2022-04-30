@@ -1,0 +1,10 @@
+PI;8;P checklistach i procedu;
+PI;4;Czymże by;
+PI;2;m kodzie testowym.;
+PI;6; ma działać i moglibyśmy wreszcie sku;
+PI;3; Pozdrawiam serdecznie :). ;
+PI;5;łyby testy jakby wszystko działało tak jak;
+PI;9;rach ~Sebastian K.;
+PI;1;Witam w moi;
+PI;7;pić się na BH;
+

@@ -10,14 +10,11 @@
 #include "../include/LinkedList.hh"
 #include "../include/Message.hh"
 
-typedef LinkedList<int> intLinkedList;
-typedef PriorityQueue<int> intPriorityQueue;
-
 int main()
 {
-	std::string fileName = "../messages/message1.txt";
+	std::string fileName = "../messages/test.txt";
 	Message mess;
 	mess.readFromFile(fileName);
-	std::cout << mess;
+	std::cout << mess << std::endl;
 
 }

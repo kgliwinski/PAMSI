@@ -1,3 +1,0 @@
-PI;2;m kodzie testowym;
-PI;3; Pozdrawiam serdecznie;
-PI;1;Witam w moi;

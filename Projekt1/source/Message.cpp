@@ -58,6 +58,12 @@ bool Message::readFromFile(const std::string fileName)
 
  std::ostream &operator<<(std::ostream &out, const Message &message)
  {
-     out << message.messageParts;
+     Message temp = message;
+     while(!temp.messageParts.isEmpty())
+     {
+         out << temp.messageParts.min();
+         temp.messageParts.removeMin();
+     }
+     
      return out;
  }

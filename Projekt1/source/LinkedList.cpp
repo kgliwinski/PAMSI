@@ -1,6 +1,6 @@
 #ifndef LINKED_LIST_CPP
 #define LINKED_LIST_CPP
-#include "LinkedList.hh"
+#include "../include/LinkedList.hh"
 
 template<typename type>
 LinkedList<type>::LinkedList() : head(nullptr)

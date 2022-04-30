@@ -4,7 +4,6 @@
 #include <fstream>
 #include <iostream>
 
-
 #include "MessagePart.hh"
 #include "PriorityQueue.hh"
 
@@ -28,6 +27,5 @@ class Message
 };
     
     std::ostream &operator<<(std::ostream &out, const Message &message);
-
 
 #endif
