@@ -6,15 +6,24 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "../include/PriorityQueue.hh"
 #include "../include/LinkedList.hh"
 #include "../include/Message.hh"
+#include "../include/PriorityQueue.hh"
 
 int main()
 {
-	std::string fileName = "../messages/test.txt";
-	Message mess;
-	mess.readFromFile(fileName);
-	std::cout << mess << std::endl;
+	std::string fileName;
+	std::cout << "Enter the fileName of message (e.g. '../messages/test.txt')" << std::endl;
+	std::cin >> fileName;
+	Message mess(fileName);
+	if (mess.readFromFile())
+	{
+		std::cout << mess << std::endl;
+		std::cout << mess.returnPrint() << std::endl;
+	}
+	else
+	{
+		std::cout << "Message is broken or doesn't exist - could not decode" << std::endl;
+	}
 
 }
