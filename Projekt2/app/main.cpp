@@ -5,7 +5,12 @@
 #include "../include/MergeSort.hh"
 int main()
 {
-	std::vector<int> vec = { 1, 5, 2, 3, 4, 6 };
+	std::vector<int> vec;
+    for(unsigned int i = 0; i < 20; ++i)
+    {
+        vec.push_back(rand() % 100);
+    }
+
 	Less<int> oper;
 	MergeSort<int, Less<int>>(vec, oper);
 	std::vector<int>::iterator iter = vec.begin();
