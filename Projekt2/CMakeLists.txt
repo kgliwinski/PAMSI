@@ -37,8 +37,8 @@ find_lto(CXX)
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in source/
-  source/QuickSort.cpp
-  source/MergeSort.cpp
+  include/QuickSort.hh
+  include/MergeSort.hh
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
