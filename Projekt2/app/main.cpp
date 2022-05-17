@@ -27,7 +27,7 @@ int main()
         vec1.push_back(rand() % 100);
     }
 
-	MergeSort<int, Less<int>>(vec1, oper);
+	QuickSort<int, Less<int>>(vec1, oper);
 	iter = vec1.begin();
 	std::cout << "Quick Sort\n";
 	while (*iter != vec1.back())
