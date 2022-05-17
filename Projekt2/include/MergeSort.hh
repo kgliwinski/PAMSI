@@ -5,18 +5,17 @@
 #include <vector>
 
 template<typename type, typename comp>
-bool MergeSort(std::vector<type> &elems, const comp &less)
+void MergeSort(std::vector<type> &elems, const comp &less)
 {
-	typedef std::vector<type> vect;
     unsigned int n = elems.size(), m, b;
     if(n <= 1)
     {
-        return 0;
+        return;
     }
-    vect v1(elems);
-    vect* in = &v1;
-    vect v2(n);
-    vect* out = &v2;
+    std::vector<type> v1(elems);
+    std::vector<type>* in = &v1;
+    std::vector<type> v2(n);
+    std::vector<type>* out = &v2;
 	for(m = 1; m < n; m*=2)
     {
         for(b = 0; b < n; b+= 2*m)
@@ -26,7 +25,6 @@ bool MergeSort(std::vector<type> &elems, const comp &less)
         std::swap(in, out);
     }
     elems = *in;
-    return 1;
 }
 
 template<typename type, typename comp>
