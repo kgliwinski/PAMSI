@@ -39,6 +39,8 @@ find_lto(CXX)
 set(SOURCES          # All .cpp files in source/
   include/QuickSort.hh
   include/MergeSort.hh
+  include/InsertionSort.hh
+  include/BucketSort.hh
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
