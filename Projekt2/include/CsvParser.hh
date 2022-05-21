@@ -9,16 +9,17 @@
 template<unsigned int colsNum>
 class CsvParser
 {
-	protected:
+	private:
 	std::vector<std::string> colsData[colsNum];
 
 	public:
-	CsvParser();
+	explicit CsvParser();
 	~CsvParser() = default;
-	bool readFile(char delimiter, std::string filename);
-	bool processLine(char delimiter, std::string line);
+	bool readFile(const char &delimiter, const std::string &filename);
+	bool processLine(const char &delimiter, const std::string &line);
 
 	unsigned int getVectorSize() { return colsData[0].size(); }
+	friend class MovieParser;
 };
 
 template<unsigned int colsNum>
@@ -31,7 +32,7 @@ CsvParser<colsNum>::CsvParser()
 }
 
 template<unsigned int colsNum>
-bool CsvParser<colsNum>::readFile(char delimiter, std::string filename)
+bool CsvParser<colsNum>::readFile(const char &delimiter,const std::string &filename)
 {
 	std::ifstream file;
 	file.open(filename, std::ios::in);
@@ -47,7 +48,7 @@ bool CsvParser<colsNum>::readFile(char delimiter, std::string filename)
 }
 
 template<unsigned int colsNum>
-bool CsvParser<colsNum>::processLine(char delimiter, std::string line)
+bool CsvParser<colsNum>::processLine(const char &delimiter, const std::string &line)
 {
 	unsigned int i = 0;
 	char sign;
@@ -67,7 +68,6 @@ bool CsvParser<colsNum>::processLine(char delimiter, std::string line)
 		{
 			words[i].push_back(sign);
 		}
-		j++;
 	}
 	for (i = 0; i < colsNum; ++i)
 	{

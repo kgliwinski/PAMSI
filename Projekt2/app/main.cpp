@@ -5,7 +5,8 @@
 #include "../include/MergeSort.hh"
 #include "../include/QuickSort.hh"
 #include "../include/BucketSort.hh"
-#include "../include/CsvParser.hh"
+#include "../include/MovieParser.hh"
+
 int main()
 {
 	std::vector<int>::iterator iter;
@@ -64,7 +65,9 @@ int main()
 	}
 	std::cout << *iter++ << " " << std::endl;
 
-	CsvParser<3> parser;
-	parser.readFile(',', "../data/projekt2_dane.CngRDs-i.csv");
-	std::cout<< parser.getVectorSize() << std::endl;
+	//CsvParser<3> parser;
+	MovieParser parser;
+	if(parser.initMovies(',', "../data/projekt2_dane.CngRDs-i.csv"))
+		std::cout << "dziala :)" << std::endl;
+	
 }

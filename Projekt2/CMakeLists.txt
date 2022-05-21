@@ -42,6 +42,7 @@ set(SOURCES          # All .cpp files in source/
   include/InsertionSort.hh
   include/BucketSort.hh
   include/CsvParser.hh
+  source/MovieParser.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
