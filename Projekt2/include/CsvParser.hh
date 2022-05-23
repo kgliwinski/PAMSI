@@ -15,9 +15,8 @@ class CsvParser
 	public:
 	explicit CsvParser();
 	~CsvParser() = default;
-	bool readFile(const char &delimiter, const std::string &filename);
+	bool readFile(const char &delimiter, const std::string &filename, const unsigned int &maxLines);
 	bool processLine(const char &delimiter, const std::string &line);
-
 	unsigned int getVectorSize() { return colsData[0].size(); }
 	friend class MovieParser;
 };
@@ -32,9 +31,14 @@ CsvParser<colsNum>::CsvParser()
 }
 
 template<unsigned int colsNum>
-bool CsvParser<colsNum>::readFile(const char &delimiter,const std::string &filename)
+bool CsvParser<colsNum>::readFile(const char &delimiter, const std::string &filename, const unsigned int &maxLines)
 {
 	std::ifstream file;
+	unsigned int i = 0;
+	for(i = 0; i < colsNum; ++i)
+	{
+		this->colsData[i].clear();
+	}
 	file.open(filename, std::ios::in);
 	if (file.fail())
 	{
@@ -43,7 +47,12 @@ bool CsvParser<colsNum>::readFile(const char &delimiter,const std::string &filen
 	for (std::string lines; std::getline(file, lines);)
 	{
 		if (!processLine(delimiter, lines)) {}
+		if (i++ == maxLines)
+		{
+			break;
+		}
 	}
+	file.close();
 	return 1;
 }
 

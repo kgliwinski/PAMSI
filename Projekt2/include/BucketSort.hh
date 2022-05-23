@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <vector>
 
-#include "../include/InsertionSort.hh"
+#include "../include/QuickSort.hh"
 
 template<typename type, typename comp>
 void BucketSort(std::vector<type> &vec, const comp &less)
@@ -26,7 +26,7 @@ void BucketSort(std::vector<type> &vec, const comp &less)
 
 	for (i = 0; i < n; ++i)
 	{
-		InsertionSort(bucks[i], less);
+		MergeSort(bucks[i], less);
 	}
 	unsigned int index = 0;
 	for (i = 0; i < n; ++i)

@@ -16,7 +16,7 @@ void InsertionSort(std::vector<type> &vec, const comp &less)
     {
         key = vec.at(i);
         j = i - 1;
-        while(j >= 0 && less( key, vec.at(j)) )
+        while(j >= 0 && less( key, (type)vec.at(j)) )
         {
             vec.at(j+1) = vec.at(j);
             j = j-1;
