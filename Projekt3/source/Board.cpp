@@ -83,6 +83,51 @@ int Board::colWin(const size_t &colNum) const
 	return noWin;
 }
 
+int Board::diagLeftWin() const
+{
+	size_t i;
+	// check the left-right, top-down diagonal
+	for (i = 0; i < boardSize - 1; ++i)
+	{
+		if (boardArr[i][i] != boardArr[i + 1][i + 1])
+		{
+			return noWin;
+		}
+	}
+	if (boardArr[0][0] == player)
+	{
+		return playerW;
+	}
+	else if (boardArr[0][0] == opponent)
+	{
+		return opponentW;
+	}
+	return noWin;
+}
+
+int Board::diagRightWin() const
+{
+	size_t i;
+	// check the right-left, top-down diagonal
+	for (i = 0; i < boardSize - 1; ++i)
+	{
+		if (boardArr[i][boardSize - i - 1] != boardArr[i + 1][boardSize - i - 2])
+		{
+			return noWin;
+		}
+	}
+
+	if (boardArr[boardSize - 1][0] == player)
+	{
+		return playerW;
+	}
+	else if (boardArr[boardSize - 1][0] == opponent)
+	{
+		return opponentW;
+	}
+	return noWin;
+}
+
 int Board::evaluate() const
 {
 	size_t row, col;
@@ -106,7 +151,16 @@ int Board::evaluate() const
 		}
 	}
 	// check diagonals for victory
-
+	int leftW = diagLeftWin();
+	if (leftW == playerW || leftW == opponentW)
+	{
+		return leftW;
+	}
+	int rightW = diagRightWin();
+	if (rightW == playerW || rightW == opponentW)
+	{
+		return rightW;
+	}
 	return noWin;
 }
 
@@ -114,7 +168,7 @@ int Board::minimax() const { return 0; }
 
 Move Board::findBestMove() const
 {
-	Move mover = {1, 0};
+	Move mover = { 0, 0 };
 	return mover;
 }
 
@@ -124,4 +178,12 @@ void Board::setBoard(char *newBoard[], const size_t &newSize)
 	{
 		memcpy(boardArr[i], newBoard[i], newSize);
 	}
+	// for(size_t i = 0; i < boardSize; ++i)
+	// {
+	// 	for(size_t j = 0; j < boardSize; ++j)
+	// 	{
+	// 		std::cout << boardArr[i][j] << " ";
+	// 	}
+	// 	std::cout << std::endl;
+	// }
 }

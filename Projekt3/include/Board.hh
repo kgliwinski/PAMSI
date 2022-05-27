@@ -30,6 +30,10 @@ class Board
 	int rowWin(const size_t &rowNum) const;
 	/// \brief Checks a col if there is a win
 	int colWin(const size_t &colNum) const;
+	/// \brief Checks a left-right, top-down diagonal if there is a win
+	int diagLeftWin() const;
+	/// \brief Cheks a right-left, top down diagonal if there is a win
+	int diagRightWin() const;
 	/// \brief Heuristic function, evaluates the boards state
 	int evaluate() const;
 	/*! \brief Minimax function. Considers all possible ways of game end
