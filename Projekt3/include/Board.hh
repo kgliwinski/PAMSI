@@ -1,5 +1,5 @@
-#ifndef BOARD_STRUCT_HH
-#define BOARD_STRUCT_HH
+#ifndef BOARD_HH
+#define BOARD_HH
 
 #include <stdexcept>
 #include <string.h>
@@ -11,6 +11,7 @@ constexpr char blank = '_';
 constexpr int playerW = 10;
 constexpr int opponentW = -10;
 constexpr int noWin = 0;
+constexpr int bestDefault = -1000;
 
 struct Move
 {
@@ -38,7 +39,7 @@ class Board
 	int evaluate() const;
 	/*! \brief Minimax function. Considers all possible ways of game end
 	 * \returns the value of the board */
-	int minimax() const;
+	int minimax(const unsigned int &depth, bool isMax) const;
 	/// \brief Returns the best possible move for the player
 	Move findBestMove() const;
 	/// \brief Board setter, for testing

@@ -6,12 +6,12 @@
 
 #include "Board.hh"
 
-int main() 
+int main()
 {
-	//unsigned int brdSize = 3;
-    Board board(3);
+	// unsigned int brdSize = 3;
+	Board board(3);
 	char **newBrd = new char *[3];
-	for(size_t i = 0; i < 3; ++i)
+	for (size_t i = 0; i < 3; ++i)
 	{
 		newBrd[i] = new char[3];
 	}
@@ -25,5 +25,5 @@ int main()
 	newBrd[2][1] = '_';
 	newBrd[2][2] = '_';
 	board.setBoard(newBrd, 9);
-	std::cout<<board.diagRightWin() <<std::endl;
+	std::cout << board.diagRightWin() << std::endl;
 }

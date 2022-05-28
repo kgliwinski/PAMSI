@@ -164,11 +164,74 @@ int Board::evaluate() const
 	return noWin;
 }
 
-int Board::minimax() const { return 0; }
+int Board::minimax(const unsigned int &depth, bool isMax) const
+{
+	int score = this->evaluate();
+	if (score == playerW || score == opponentW)
+	{
+		return score;
+	}
+	if (!this->isMovesLeft())
+	{
+		return 0;
+	}
+	int best = bestDefault;
+	if (isMax)
+	{
+		for (size_t i = 0; i < boardSize; ++i)
+		{
+			for (size_t j = 0; j < boardSize; ++j)
+			{
+				if (boardArr[i][j] == blank)
+				{
+					boardArr[i][j] = player;
+					best = std::min(best, minimax(depth + 1, !isMax));
+					boardArr[i][j] = blank;
+				}
+			}
+		}
+		return best;
+	}
+	else
+	{
+		best = bestDefault * (-1);
+		for (size_t i = 0; i < boardSize; ++i)
+		{
+			for (size_t j = 0; j < boardSize; ++j)
+			{
+				if (boardArr[i][j] == blank)
+				{
+					boardArr[i][j] = opponent;
+					best = std::min(best, minimax(depth + 1, !isMax));
+					boardArr[i][j] = blank;
+				}
+			}
+		}
+	}
+	return best;
+}
 
 Move Board::findBestMove() const
 {
-	Move mover = { 0, 0 };
+	Move mover = { -1, -1 };
+	int moveVal;
+	int bestVal = bestDefault;
+	for (size_t i = 0; i < boardSize; ++i)
+	{
+		for (size_t j = 0; j < boardSize; ++j)
+		{
+			if (boardArr[i][j] == blank)
+			{
+				boardArr[i][j] = player;
+				moveVal = minimax(0, false);
+				boardArr[i][j] = blank;
+				if (moveVal > bestVal)
+				{
+					mover = Move{ (int)i, (int)j };
+				}
+			}
+		}
+	}
 	return mover;
 }
 
