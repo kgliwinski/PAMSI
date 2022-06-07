@@ -7,3 +7,8 @@ void Engine::changeBoardSize(const size_t &newSize)
 {
     board.changeBoardSize(newSize);
 }
+
+size_t Engine::getBoardSize()
+{
+    return board.getBoardSize();
+}

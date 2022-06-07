@@ -11,8 +11,6 @@ class TerminalEngine : public Engine
     public:
     TerminalEngine(TerminalEngine const &) = delete;
 	void operator=(TerminalEngine const &) = delete;
-
-    
 };
 
 #endif
