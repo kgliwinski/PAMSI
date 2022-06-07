@@ -250,3 +250,42 @@ void Board::setBoard(char *newBoard[], const size_t &newSize)
 	// 	std::cout << std::endl;
 	// }
 }
+
+void Board::changeBoardSize(const size_t &newSize)
+{
+	for (size_t j = 0; j < boardSize; ++j)
+	{
+		delete[] boardArr[j];
+	}
+	delete[] boardArr;
+	boardSize = newSize;
+	boardArr = new char *[boardSize];
+	for (size_t j = 0; j < boardSize; ++j)
+	{
+		boardArr[j] = new char[boardSize];
+	}
+	this->clearBoard();
+}
+
+void Board::printBoard() const
+{
+	for (size_t i = 0; i < boardSize; ++i)
+	{
+		for (size_t j = 0; j < boardSize; ++j)
+		{
+			std::cout << boardArr[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+void Board::clearBoard()
+{
+	for(size_t i = 0; i < boardSize; ++i)
+	{
+		for(size_t j = 0; j < boardSize; ++j)
+		{
+			boardArr[i][j] = blank;
+		}
+	}
+}

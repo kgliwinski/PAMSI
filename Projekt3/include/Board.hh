@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string.h>
 #include <iostream>
+#include "../include/SFML/Config.hpp"
 
 constexpr char player = 'x';
 constexpr char opponent = 'o';
@@ -42,8 +43,14 @@ class Board
 	int minimax(const unsigned int &depth, bool isMax) const;
 	/// \brief Returns the best possible move for the player
 	Move findBestMove() const;
+	/// \brief Reallocates the memory and changes size of board, clears the board
+	void changeBoardSize(const size_t &newSize);
 	/// \brief Board setter, for testing
 	void setBoard(char *newBoard[], const size_t &newSize);
+	/// \brief Print board in the std out
+	void printBoard() const;
+	/// \brief clears the board of all signs and sets blank in their place
+	void clearBoard();
 };
 
 #endif

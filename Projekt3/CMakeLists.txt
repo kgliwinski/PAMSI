@@ -20,6 +20,8 @@ option(ENABLE_LTO "Enable link time optimization" ON)
 option(ENABLE_DOCTESTS "Include tests in the library. Setting this to OFF will remove all doctest related code.
                         Tests in tests/*.cpp will still be enabled." ON)
 
+option(TERMINAL_ENGINE ON)
+
 # Include stuff. No change needed.
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(ConfigSafeGuards)
@@ -29,6 +31,7 @@ include(Doctest)
 include(Documentation)
 include(LTO)
 include(Warnings)
+include(TerminalEngine)
 
 # Check for LTO support.
 find_lto(CXX)
@@ -38,6 +41,8 @@ find_lto(CXX)
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in source/
     source/Board.cpp
+    source/GameEngine.cpp
+    source/Engine.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
@@ -54,7 +59,8 @@ add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # There's also (probably) doctests within the library, so we need to see this as well.
-target_link_libraries(${LIBRARY_NAME} PUBLIC doctest)
+target_link_libraries(${LIBRARY_NAME} PUBLIC doctest sfml-graphics sfml-window sfml-system ${TGUI_LIBRARY})
+
 
 # Set the compile options you want (change as needed).
 target_set_warnings(${LIBRARY_NAME} ENABLE ALL AS_ERROR ALL DISABLE Annoying)

@@ -1,6 +1,15 @@
-# Project 1
+# Project 3
 
-Implementing a queue based on circular list - circleList.
+Tic tac toe
+
+To compile a simple program played in bash terminal: compile with
+```
+    cmake .. -DTERMINAL_ENGINE=OFF
+```
+In the build directory. To see a nice SFML GUI use
+```
+    cmake .. -DTERMINAL_ENGINE=ON
+```
 
 ## Structure
 ``` text
