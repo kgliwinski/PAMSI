@@ -19,7 +19,12 @@ constexpr int MIN = -1000;
 
 struct Move
 {
-	int row, col;
+	size_t row, col;
+	friend std::istream &operator >> (std::istream &in, Move &M)
+	{
+		in >> M.row >> M.col;
+		return in;
+	}
 };
 
 class Board
@@ -45,13 +50,15 @@ class Board
 	/*! \brief Minimax function. Considers all possible ways of game end
 	 * \returns the value of the board */
 	[[nodiscard]] int minimax(const unsigned int &depth, bool isMax) const;
-	/*! \brief Minimax function. Considers all possible ways of game end. Uses Alpha Beta pruning
+	/*! \brief Min and max functions. Considers all possible ways of game end. Uses Alpha Beta pruning
 	 * \returns the value of the board */
-	[[nodiscard]] int minimax(const unsigned int &depth, int nodeIndex, bool maximizingPlayer, int values[], int alpha, int beta) const;
-	/// \brief Returns the best possible move for the player
-	[[nodiscard]] Move findBestMove() const;
+	int max(uint8_t depth, uint8_t miniMaxDepth, int alpha, int beta, size_t &bestiRes, size_t &bestjRes) const;
+	int min(uint8_t depth, uint8_t miniMaxdepth, int alpha, int beta, size_t &bestiRes, size_t &bestjRes) const;
+	[[nodiscard]] Move findBestMove(const size_t &depth) const;
 	/// \brief Returns the best possible move for the player woth the use of Alpha Beta pruning
-	[[nodiscard]] Move findBestMove(const unsigned int &depth, bool maximizingPlayer, int values[], int alpha, int beta) const;
+	[[nodiscard]] Move findBestMove(const size_t &depth, const size_t &miniMaxDepth) const;
+	/// \brief Inserts player or opponent into the boardArr in certain Move
+	bool insertMove(const Move &move,const char &playerOrOpponent);
 	/// \brief Reallocates the memory and changes size of board, clears the board
 	void changeBoardSize(const size_t &newSize);
 	/// \brief Reallocates the memory and changes size of board, clears the board

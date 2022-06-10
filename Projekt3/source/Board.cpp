@@ -211,54 +211,142 @@ int Board::minimax(const unsigned int &depth, bool isMax) const
 	return best;
 }
 
-int Board::minimax(const unsigned int &depth, int nodeIndex, bool maximizingPlayer, int values[], int alpha, int beta) const
+int Board::max(uint8_t depth, uint8_t miniMaxDepth, int alpha, int beta, size_t &bestiRes, size_t &bestjRes) const
 {
-	if (depth == 3)
-		return values[nodeIndex];
+	size_t besti, bestj;
+	int bestResult = MIN;
+	uint8_t gameResult = 0;
+	int result = 0;
 
-	if (maximizingPlayer)
+	gameResult = evaluate();
+	if (depth == 0 || gameResult != 0)
 	{
-		int best = MIN;
-
-		// Recur for left and
-		// right children
-		for (unsigned int i = 0; i < boardSize - 1; i++)
-		{
-
-			int val = minimax(depth + 1, nodeIndex * 2 + i, false, values, alpha, beta);
-			best = std::max(best, val);
-			alpha = std::max(alpha, best);
-
-			// Alpha Beta Pruning
-			if (beta <= alpha)
-				break;
+		if (gameResult == opponent)
+		{ // ai win
+			return opponentW;
 		}
-		return best;
+		else if (gameResult == player)
+		{ // human win
+			return playerW;
+		}
+		else
+		{ // tie
+			return noWin;
+		}
+	}
+
+	for (size_t i = 0; i < boardSize; ++i)
+	{
+		for (size_t j = 0; j < boardSize; ++j)
+		{
+			if (boardArr[i][j] == blank)
+			{
+				boardArr[i][j] = opponent;
+				result = min(depth - 1, miniMaxDepth, alpha, beta, besti, bestj);
+				boardArr[i][j] = blank;
+
+				if (result > bestResult)
+				{
+					bestResult = result;
+					besti = i;
+					bestj = j;
+				}
+
+				if (bestResult >= beta)
+				{
+					return bestResult;
+				}
+
+				if (bestResult > alpha)
+				{
+					alpha = bestResult;
+				}
+			}
+		}
+	}
+	if (depth == miniMaxDepth)
+	{
+		bestiRes = besti;
+		bestjRes = bestj;
+	}
+	return bestResult;
+}
+
+int Board::min(uint8_t depth, uint8_t miniMaxdepth, int alpha, int beta, size_t &bestiRes, size_t &bestjRes) const
+{
+	int bestResult = MAX;
+	uint8_t gameResult = 0;
+	int result = 0;
+	//size_t besti, bestj;
+	gameResult = evaluate();
+	if (depth == 0 || gameResult != 0)
+	{
+		if (gameResult == opponent)
+		{ // ai win
+			return opponentW;
+		}
+		else if (gameResult == player)
+		{ // human win
+			return playerW;
+		}
+		else
+		{ // tie
+			return noWin;
+		}
+	}
+
+	for (size_t i = 0; i < boardSize; ++i)
+	{
+		for (size_t j = 0; j < boardSize; ++j)
+		{
+			if (boardArr[i][j] == blank)
+			{
+				boardArr[i][j] = player;
+				result = max(depth - 1, miniMaxdepth, alpha, beta, bestiRes, bestjRes);
+				boardArr[i][j] = blank;
+
+				if (result < bestResult)
+				{
+					bestResult = result;
+				}
+
+				if (bestResult <= alpha)
+				{
+					return bestResult;
+				}
+
+				if (bestResult < beta)
+				{
+					beta = bestResult;
+				}
+			}
+		}
+	}
+	return bestResult;
+}
+
+bool Board::insertMove(const Move &move, const char &playerOrOpponent)
+{
+	if (move.row >= boardSize || move.col >= boardSize)
+	{
+		std::string errMessage = "Out of range - the boardArr size is " + std::to_string(boardSize) + " x " + std::to_string(boardSize);
+		throw std::out_of_range(errMessage);
+		return 0;
+	}
+	if (boardArr[move.row][move.col] != blank)
+	{
+		return 0;
 	}
 	else
 	{
-		int best = MAX;
-
-		// Recur for left and
-		// right children
-		for (unsigned int i = 0; i < boardSize - 1; i++)
-		{
-			int val = minimax(depth + 1, nodeIndex * 2 + i, true, values, alpha, beta);
-			best = std::min(best, val);
-			beta = std::min(beta, best);
-
-			// Alpha Beta Pruning
-			if (beta <= alpha)
-				break;
-		}
-		return best;
+		boardArr[move.row][move.col] = playerOrOpponent;
 	}
+	return 1;
 }
 
-
-Move Board::findBestMove() const
+Move Board::findBestMove(const size_t &depth) const
 {
-	Move mover = { -1, -1 };
+	Move mover = { 0, 0 };
 	int moveVal;
 	int bestVal = bestDefault;
 	for (size_t i = 0; i < boardSize; ++i)
@@ -268,11 +356,11 @@ Move Board::findBestMove() const
 			if (boardArr[i][j] == blank)
 			{
 				boardArr[i][j] = player;
-				moveVal = minimax(0, false);
+				moveVal = minimax(depth, false);
 				boardArr[i][j] = blank;
 				if (moveVal > bestVal)
 				{
-					mover = Move{ (int)i, (int)j };
+					mover = Move{ i, j };
 				}
 			}
 		}
@@ -280,27 +368,11 @@ Move Board::findBestMove() const
 	return mover;
 }
 
-Move Board::findBestMove(const unsigned int &depth, bool maximizingPlayer, int values[], int alpha, int beta) const
+Move Board::findBestMove(const size_t &depth, const size_t &miniMaxDepth) const
 {
-	Move mover = { -1, -1 };
-	int moveVal;
-	int bestVal = bestDefault;
-	for (size_t i = 0; i < boardSize; ++i)
-	{
-		for (size_t j = 0; j < boardSize; ++j)
-		{
-			if (boardArr[i][j] == blank)
-			{
-				boardArr[i][j] = player;
-				moveVal = minimax(depth, 0, maximizingPlayer, values, alpha, beta);
-				boardArr[i][j] = blank;
-				if (moveVal > bestVal)
-				{
-					mover = Move{ (int)i, (int)j };
-				}
-			}
-		}
-	}
+	size_t i = 0, j = 0;
+	max(depth, miniMaxDepth, MIN, MAX, i, j);
+	Move mover = { i, j };
 	return mover;
 }
 
@@ -328,10 +400,7 @@ void Board::changeBoardSize(const size_t &newSize)
 	this->clearBoard();
 }
 
-size_t Board::getBoardSize() const
-{
-	return this->boardSize;
-}
+size_t Board::getBoardSize() const { return this->boardSize; }
 
 void Board::printBoard() const
 {

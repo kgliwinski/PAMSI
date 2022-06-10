@@ -1,6 +1,5 @@
 #include "../include/GameEngine.hh"
 
-sf::RenderWindow GameEngine::Window = sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), "SFML works!");
 
 bool GameEngine::init()
 {
@@ -12,6 +11,7 @@ void GameEngine::printBoard() { board.printBoard(); }
 
 bool GameEngine::mainLoop()
 {
+	sf::RenderWindow Window = sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 

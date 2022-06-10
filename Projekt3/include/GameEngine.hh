@@ -16,7 +16,6 @@ class GameEngine : public Engine
 {
 	private:
 	GameEngine() {}
-    static sf::RenderWindow Window;
     
     public:
     GameEngine(GameEngine const &) = delete;

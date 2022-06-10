@@ -42,6 +42,7 @@ find_lto(CXX)
 set(SOURCES          # All .cpp files in source/
     source/Board.cpp
     source/GameEngine.cpp
+    source/TerminalEngine.cpp
     source/Engine.cpp
 )
 set(TESTFILES        # All .cpp files in tests/

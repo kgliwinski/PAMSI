@@ -10,7 +10,9 @@
 
 int main()
 {
-	
+	TerminalEngine::init();
+	TerminalEngine::showMenu();
+	TerminalEngine::mainLoop();
 }
 
 #endif
